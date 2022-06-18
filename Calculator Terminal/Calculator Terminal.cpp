@@ -19,7 +19,7 @@ int main()
 
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    cout << "Version: 1.0   Created by: Dan F" << endl;
+    cout << "Version: 0.1.0   Created by: Dan F" << endl;
 
     while (run == true) {
     start:;
