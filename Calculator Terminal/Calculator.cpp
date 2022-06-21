@@ -1,50 +1,54 @@
-#include "Calculator.h"
-#include <string>
+#include <iostream>
+#include "calculator.h"
 using namespace std;
 
-Calculator::Calculator()
+calculator::calculator()
 {
 	op = 0;
 }
 
-void Calculator::input()
+istream& operator >>(istream& ins, calculator& c)
 {
-	cin >> op;
-	if (cin.fail())
-	{
-		cout << "Error: Illegal input. Exiting program...";
-		exit(0);
-	}
+	ins >> c.op;
+	return ins;
 }
 
-void Calculator::output()
+ostream& operator <<(ostream& outs, const calculator& c)
 {
-	cout << "Result: " << op << endl;
+	outs << "Result = " << c.op << "		[Enter (+,-,*,/) num2] or [Press(c) to clear operands] or [Press(q) to quit to root]" << endl;
+	outs << "Input: ";
+	return outs;
 }
 
-float Calculator::getInput()
+float calculator::getOp()
 {
 	return op;
 }
 
-void Calculator::add(Calculator op1, Calculator op2)
+calculator operator +(const calculator& calc1, const calculator& calc2)
 {
-	op = (op1.getInput() + op2.getInput());
+	calculator temp;
+	temp.op = calc1.op + calc2.op;
+	return temp;
 }
 
-void Calculator::subtract(Calculator op1, Calculator op2)
+calculator operator -(const calculator& calc1, const calculator& calc2)
 {
-	op = (op1.getInput() - op2.getInput());
+	calculator temp;
+	temp.op = calc1.op - calc2.op;
+	return temp;
 }
 
-void Calculator::multiply(Calculator op1, Calculator op2)
+calculator operator *(const calculator& calc1, const calculator& calc2)
 {
-	op = (op1.getInput() * op2.getInput());
+	calculator temp;
+	temp.op = calc1.op * calc2.op;
+	return temp;
 }
 
-void Calculator::divide(Calculator op1, Calculator op2)
+calculator operator /(const calculator& calc1, const calculator& calc2)
 {
-	op = (op1.getInput() / op2.getInput());
+	calculator temp;
+	temp.op = calc1.op / calc2.op;
+	return temp;
 }
-
-

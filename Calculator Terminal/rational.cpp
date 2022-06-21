@@ -1,123 +1,105 @@
-#include "rational.h"
 #include <iostream>
-#include <string>
+#include "rational.h"
 using namespace std;
 
-rational::rational()
+//default constructor
+rational::rational(int numer, int denom) //initialize to 0 and 1
 {
-    num = 0;
-    den = 1;
+	num = numer;
+	den = denom;
+
+	//invalid parameters: if num and den arent equal to default values
+	if ((numer != 0) || (denom != 1)) 
+	{
+		cout << "Error: Invalid parameters" << endl;
+		exit(1);
+	}
 }
 
-void rational::input()
+//input function
+istream& operator >>(istream& ins, rational& r)
 {
-    char slash;
-    cin >> num >> slash >> den;
-    if (cin.fail())
-    {
-        cout << "Error: Illegal input. Exiting program...";
-        exit(0);
-    }
+	char slash;
+	ins >> r.num >> slash >> r.den;
+	return ins;
 }
 
-void rational::output() const
+//output function
+ostream& operator <<(ostream& outs, const rational& r)
 {
-    cout << "Result = " << num << "/" << den << endl;
+	outs << "Result = " << r.num << "/" << r.den << endl;
+	outs << "Input: ";
+	return outs;
 }
 
+//getNumerator Accessor
 int rational::getNumerator()
 {
-    return num;
+	return num;
 }
 
+//getDenominator Accessor
 int rational::getDenominator()
 {
-    return den;
+	return den;
 }
 
-void rational::add(rational rat1, rational rat2)
+rational operator +(const rational& rat1, const rational& rat2)
 {
-    num = ((rat1.getNumerator() * rat2.getDenominator()) + (rat2.getNumerator() * rat1.getDenominator()));
-    den = ((rat1.getDenominator() * rat2.getDenominator()));
+	rational temp;
+	temp.num = (rat1.num * rat2.den + rat2.num * rat1.den);
+	temp.den = (rat1.den * rat2.den);
+	temp.simplify();
+	return temp;
 }
 
-void rational::subtract(rational rat1, rational rat2)
+rational operator -(const rational& rat1, const rational& rat2)
 {
-    num = ((rat1.getNumerator() * rat2.getDenominator()) - (rat2.getNumerator() * rat1.getDenominator()));
-    den = ((rat1.getDenominator() * rat2.getDenominator()));
+	rational temp;
+	temp.num = (rat1.num * rat2.den - rat2.num * rat1.den);
+	temp.den = (rat1.den * rat2.den);
+	temp.simplify();
+	return temp;
 }
 
-void rational::multiply(rational rat1, rational rat2)
+rational operator *(const rational& rat1, const rational& rat2)
 {
-    num = (rat1.getNumerator() * rat2.getNumerator());
-    den = (rat1.getDenominator() * rat2.getDenominator());
+	//cross multiply
+	rational temp;
+	temp.num = (rat1.num * rat2.num);
+	temp.den = (rat1.den * rat2.den);
+	temp.simplify();
+	return temp;
 }
 
-void rational::divide(rational rat1, rational rat2)
+rational operator /(const rational& rat1, const rational& rat2)
 {
-    num = (rat1.getNumerator() * rat2.getDenominator());
-    den = (rat1.getDenominator() * rat2.getNumerator());
-}
-
-void rational::addG(rational rat1, rational rat2)
-{
-    rational temp;
-    temp.num = ((rat1.getNumerator() * rat2.getDenominator()) + (rat2.getNumerator() * rat1.getDenominator()));
-    temp.den = ((rat1.getDenominator() * rat2.getDenominator()));
-    temp.simplify();
-    num = temp.num;
-    den = temp.den;
-}
-
-void rational::subtractG(rational rat1, rational rat2)
-{
-    rational temp;
-    temp.num = ((rat1.getNumerator() * rat2.getDenominator()) - (rat2.getNumerator() * rat1.getDenominator()));
-    temp.den = ((rat1.getDenominator() * rat2.getDenominator()));
-    temp.simplify();
-    num = temp.num;
-    den = temp.den;
-}
-
-void rational::multiplyG(rational rat1, rational rat2)
-{
-    rational temp;
-    temp.num = (rat1.getNumerator() * rat2.getNumerator());
-    temp.den = (rat1.getDenominator() * rat2.getDenominator());
-    temp.simplify();
-    num = temp.num;
-    den = temp.den;
-}
-
-void rational::divideG(rational rat1, rational rat2)
-{
-    rational temp;
-    temp.num = (rat1.getNumerator() * rat2.getDenominator());
-    temp.den = (rat1.getDenominator() * rat2.getNumerator());
-    temp.simplify();
-    num = temp.num;
-    den = temp.den;
+	rational temp;
+	temp.num = (rat1.num * rat2.den);
+	temp.den = (rat1.den * rat2.num);
+	temp.simplify();
+	return temp;
 }
 
 void rational::simplify()
 {
-    int commonD = gcd(num, den); //use gcd function
-    num = num / commonD;
-    den = den / commonD;
+	int commonD = gcd(num, den); //use gcd function
+	num = num / commonD;
+	den = den / commonD;
 }
 
 int rational::gcd(int a, int b)
 {
-    while (a != 0 && b != 0)
-    {
-        a = a % b;
-        if (a != 0)
-            b = b % a;
-    }
+	while (a != 0 && b != 0)
+	{
+		a = a % b;
+		if (a != 0)
+			b = b % a;
+	}
 
-    if (a == 0)
-        return b;
-    if (b == 0)
-        return a;
-    return 1;
+	if (a == 0)
+		return b;
+	if (b == 0)
+		return a;
+	return 1;
 }

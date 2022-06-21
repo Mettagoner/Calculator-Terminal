@@ -1,23 +1,22 @@
 #include <iostream>
-#include <string>
-#include <ctype.h>
 using namespace std;
 #pragma once
 
-class Calculator
+class calculator
 {
 public:
-	Calculator();
-	void input();
-	void output();
-	float getInput();
-	void add(Calculator op1, Calculator op2);
-	void subtract(Calculator op1, Calculator op2);
-	void multiply(Calculator op1, Calculator op2);
-	void divide(Calculator op1, Calculator op2);
+    //Modify constructor declaration to set default values for parameters. See instructions below.
+    calculator();
+    friend istream& operator >>(istream& ins, calculator& c);
+    friend ostream& operator <<(ostream& outs, const calculator& c);
+    float getOp();
+    friend calculator operator +(const calculator& calc1, const calculator& calc2);
+    friend calculator operator -(const calculator& calc1, const calculator& calc2);
+    friend calculator operator *(const calculator& calc1, const calculator& calc2);
+    friend calculator operator /(const calculator& calc1, const calculator& calc2);
+    friend bool operator ==(const calculator& calc1, const calculator& calc2);
 
 private:
-	string str;
 	float op;
 };
 
