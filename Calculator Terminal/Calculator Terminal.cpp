@@ -19,8 +19,8 @@ int main()
 		{
 		case 'a':
 			cout << endl;
-		clearA:; cout << "NORMAL CALCULATION MODE ENABLED" << endl;
-			cout << "Instructions:	[Enter num1 (+,-,*,/)]" << endl;
+			 cout << "NORMAL CALCULATION MODE ENABLED" << endl;
+		 clearA:; cout << "Instructions:	[Enter num1 (+,-,*,/) num2]" << endl;
 			cout << "Input: ";
 			cin >> calc1; if (cin.fail()) {std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearA;}
 			do {
@@ -66,7 +66,7 @@ int main()
 		case 'b':
 			cout << endl;
 		clearB:; cout << "FRACTION CALCULATION MODE ENABLED" << endl;
-			cout << "Instructions:   [num1/den1 (+,-,*,/) num2/den2]   [Press (c) to clear operands]   [Press (q) to quit to root]" << endl;
+			cout << "Instructions:   [num1/den1 (+,-,*,/) num2/den2]" << endl;
 			cout << "Input: ";
 			cin >> rat1; if (cin.fail()) {std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearB;}
 			do {

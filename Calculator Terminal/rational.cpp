@@ -27,7 +27,7 @@ istream& operator >>(istream& ins, rational& r)
 //output function
 ostream& operator <<(ostream& outs, const rational& r)
 {
-	outs << "Result = " << r.num << "/" << r.den << endl;
+	outs << "Result = " << r.num << "/" << r.den << "		[Enter (+,-,*,/) num2/den2] or [Press (c) to clear operands] or [Press (q) to quit to root]" << endl;
 	outs << "Input: ";
 	return outs;
 }
