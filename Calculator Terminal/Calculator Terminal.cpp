@@ -10,21 +10,22 @@ int main()
 	char operMain, operA, operB;
 	calculator calc1, calc2;
 	rational rat1, rat2;
-	cout << "Version: 1.0.0		Developed by: Mettagoner" << endl << endl;
+	cout << "Version: 1.0.1		Developed by: Mettagoner" << endl << endl;
 	do
 	{
+	clearMain:;
 		cout << "Press (a) for normal calculation   (b) for fraction calculation   (c) for square root calculation   (q)uit: ";
-		cin >> operMain;
+		cin >> operMain; if ((operMain != 'a') && (operMain != 'b') && (operMain != 'c') && (operMain != 'q')) {std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearMain; }
 		switch (operMain)
 		{
 		case 'a':
-			cout << endl;
-			 cout << "NORMAL CALCULATION MODE ENABLED" << endl;
-		 clearA:; cout << "Instructions:	[Enter num1 (+,-,*,/) num2]" << endl;
+			cout << endl << endl;
+			cout << "NORMAL CALCULATION MODE ENABLED" << endl;
+		clearA:; cout << "Instructions:	[Enter num1 (+,-,*,/) num2]" << endl;
 			cout << "Input: ";
 			cin >> calc1; if (cin.fail()) {std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearA;}
 			do {
-				cin >> operA; if (cin.fail()) {std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearA;}
+				cin >> operA; if ((operA != '+') && (operA != '-') && (operA != '*') && (operA != '/') && (operA != 'q') || (cin.fail())) { std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearA; }
 				//CLEAR OPERANDS
 				if (operA == 'c')
 				{
@@ -35,7 +36,7 @@ int main()
 				if (operA == 'q')
 				{
 					cout << "NORMAL CALCULATION MODE DISABLED" << endl;
-					cout << endl; //format spacing
+					cout << endl << endl; //format spacing
 					break;
 				}
 				cin >> calc2; if (cin.fail()) {std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearA;}
@@ -64,13 +65,13 @@ int main()
 			break; //break 'a' switch case
 
 		case 'b':
-			cout << endl;
+			cout << endl << endl;
 		clearB:; cout << "FRACTION CALCULATION MODE ENABLED" << endl;
 			cout << "Instructions:   [num1/den1 (+,-,*,/) num2/den2]" << endl;
 			cout << "Input: ";
-			cin >> rat1; if (cin.fail()) {std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearB;}
+			cin >> rat1; if (cin.fail()) { std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearB; }
 			do {
-				cin >> operB; if (cin.fail()) {std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearB;}
+				cin >> operB; if ((operB != '+') && (operB != '-') && (operB != '*') && (operB != '/') && (operB != 'q') || (cin.fail())) { std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearB; }
 				//CLEAR OPERANDS
 				if (operB == 'c')
 				{
@@ -81,10 +82,10 @@ int main()
 				if (operB == 'q')
 				{
 					cout << "FRACTION CALCULATION MODE DISABLED" << endl;
-					cout << endl; //format spacing
+					cout << endl << endl; //format spacing
 					break;
 				}
-				cin >> rat2; if (cin.fail()) {std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearB;}
+				cin >> rat2; if (cin.fail()) { std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto clearB; }
 				//IF STATEMENTS
 				if (operB == '+')
 				{
@@ -112,13 +113,13 @@ int main()
 		case 'c':
 			float sqroot;
 			char operSqroot;
-			cout << endl; //format spacing
+			cout << endl << endl; //format spacing
 		retryC:; cout << "SQUARE ROOT MODE ENABLED" << endl;
 			cout << "Instructions:   [Enter a value to square root]" << endl;
 			do
 			{
 				cout << "Input: ";
-				cin >> sqroot; if (cin.fail()) {std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto retryC;}
+				cin >> sqroot; if (cin.fail()) { std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto retryC; }
 				cout << "Sqrt(" << sqroot << ") " << "Result = " << sqrt(sqroot) << endl;
 				cout << "[Press (r) to retry] or [Press (q) to quit to root]: ";
 				cin >> operSqroot; if ((operSqroot != 'r') && (operSqroot != 'q')) { std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto retryC; }
@@ -128,9 +129,9 @@ int main()
 				}
 			} while (operSqroot != 'q');
 			cout << "SQUARE ROOT MODE DISABLED" << endl;
-			cout << endl; //format spacing
+			cout << endl << endl; //format spacing
 			break; //break 'c' switch case
 		}//break operMain switch case
-	} while (operMain != 'q'); 
+	} while (operMain != 'q');
 	return 0;
 }
