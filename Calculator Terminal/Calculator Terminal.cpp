@@ -221,9 +221,9 @@ int main()
 			cout << "EXPONENT MODE ENABLED" << endl;
 		retryE:; cout << "Instructions:	[Enter a number then an exponent]" << endl;
 			do {
-				cout << "Enter a number: ";
+				cout << "Enter a number: "; 
 				cin >> numE; if (cin.fail()) { std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto retryE; }
-				cout << "Enter an exponent: ";
+				cout << "Enter an exponent: " << endl;
 				cin >> expE; if (cin.fail()) { std::cin.clear(); std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); cout << "Illegal input. Resetting..." << endl; goto retryE; }
 				cout << "Result: " << pow(numE, expE) << endl;
 				cout << "[Press (r) to retry] or [Press (q) to quit to root]: ";
